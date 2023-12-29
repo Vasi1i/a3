@@ -55,7 +55,7 @@ jobs:
         run: echo BRANCH_NAME=${GITHUB_REF##*/}
 
       - name: SONAR_PROJECT_KEY
-        run: echo SONAR_PROJECT_KEY="project-${BRANCH_NAME//\//-}"
+        run: echo SONAR_PROJECT_KEY="project-${BRANCH_NAME}"
           
         # mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
           
