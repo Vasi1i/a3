@@ -39,25 +39,26 @@ jobs:
       - name: analysis.author
         run: echo ${{ github.actor }}
         
-      - name: SonarQube Scan
+
 
         # run: |
         #   BRANCH_NAME=${GITHUB_REF##*/}
         #   SONAR_PROJECT_KEY="project-${BRANCH_NAME//\//-}"
         #   mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
 
-        run: |
-          BRANCH_NAME=${GITHUB_REF##*/}
-          SONAR_PROJECT_KEY="project-${BRANCH_NAME//\//-}"
-          SONAR_PROJECT_NAME="Project ${BRANCH_NAME}"
-
       - name: BRANCH_NAME
         run: echo BRANCH_NAME=${GITHUB_REF##*/}
 
       - name: SONAR_PROJECT_KEY
         run: echo SONAR_PROJECT_KEY=${GITHUB_REF##*/}
-          
-        # mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
+
+      - name: Sonarqube
+
+        run: |
+          BRANCH_NAME=${GITHUB_REF##*/}
+          SONAR_PROJECT_KEY=${BRANCH_NAME}
+          SONAR_PROJECT_NAME=${BRANCH_NAME}
+          mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
           
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.author=${{ github.actor }}
         
