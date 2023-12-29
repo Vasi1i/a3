@@ -37,11 +37,11 @@ jobs:
 
 # Warning:  The property 'sonar.login' is deprecated and will be removed in the future. Please use the 'sonar.token' property instead when passing a token.
       - name: analysis.author
-        run: echo $GIT_ACTOR
+        run: echo ${{ github.actor }}
         
       - name: SonarQube Scan
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.token=$SONAR_TOKEN
-        run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.author=$GIT_ACTOR
+        run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.author=${{ github.actor }}
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.author=${GITHUB_ACTOR}
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.buildNumber=${GITHUB_RUN_ID} -Dsonar.analysis.pipeline=${GITHUB_WORKFLOW} -Dsonar.analysis.sha1=${GITHUB_SHA} -Dsonar.analysis.repository=${GITHUB_REPOSITORY} -Dsonar.analysis.branch=${GITHUB_REF} -Dsonar.analysis.author=${GITHUB_ACTOR}
         # The problem it's caused by /d:sonar.source="Project" or /d:sonar.tests="Project.Tests", just remove and works.
@@ -49,7 +49,7 @@ jobs:
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.sources=. -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          GIT_ACTOR: ${{ github.actor }}
+          # GIT_ACTOR: ${{ github.actor }}
 
       # - name: Extract branch name
       #   shell: bash
