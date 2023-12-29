@@ -37,7 +37,7 @@ jobs:
 
 # Warning:  The property 'sonar.login' is deprecated and will be removed in the future. Please use the 'sonar.token' property instead when passing a token.
       - name: analysis.author
-        run: echo GIT_ACTOR
+        run: echo $GIT_ACTOR
         
       - name: SonarQube Scan
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.token=$SONAR_TOKEN
