@@ -50,7 +50,12 @@ jobs:
           BRANCH_NAME=${GITHUB_REF##*/}
           SONAR_PROJECT_KEY="project-${BRANCH_NAME//\//-}" # Replace "/" with "-"
           SONAR_PROJECT_NAME="Project ${BRANCH_NAME}"
-          mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
+
+      - name: BRANCH_NAME
+        run: echo BRANCH_NAME=${GITHUB_REF##*/}
+          
+        # mvn sonar:sonar -Dsonar.projectKey=${SONAR_PROJECT_KEY} -Dsonar.projectName="${SONAR_PROJECT_NAME}" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=${{ secrets.SONAR_TOKEN }} -Dsonar.analysis.author=${{ github.actor }}
+          
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN -Dsonar.analysis.author=${{ github.actor }}
         
         # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.token=$SONAR_TOKEN
