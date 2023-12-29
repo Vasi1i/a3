@@ -1,0 +1,48 @@
+# This is a basic workflow to help you get started with Actions
+
+name: A1
+
+# Controls when the workflow will run
+on: push
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # push:
+  #   branches: [ "main" ]
+  # pull_request:
+  #   branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  # workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  my_testing:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: step Print my_testing
+        run: echo "my_testing"
+
+      - name: step Branch-name
+        run: echo running on branch ${GITHUB_REF##*/}
+
+      - name: step Checkout-code
+        uses: actions/checkout@v3
+
+      - name: step Set up Java
+        uses: actions/setup-java@v3
+
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+# Warning:  The property 'sonar.login' is deprecated and will be removed in the future. Please use the 'sonar.token' property instead when passing a token.
+      - name: SonarQube Scan
+        run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.sources=. -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.token=$SONAR_TOKEN
+        # run: mvn sonar:sonar -Dsonar.projectKey=a1 -Dsonar.sources=. -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=$SONAR_TOKEN
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+      # - name: Extract branch name
+      #   shell: bash
+      #   run: echo "branch=${GITHUB_HEAD_REF:-${GITHUB_REF#refs/heads/}}" >> $GITHUB_OUTPUT
+      #   id: extract_branch
