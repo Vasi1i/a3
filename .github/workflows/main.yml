@@ -45,7 +45,7 @@ jobs:
       - name: Sonarqube
 
         run: |
-          mvn sonar:sonar -Dsonar.projectKey="cinema" -Dsonar.projectName="cinema" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=sqb_0a1fc0450f85147fd59e2a74f8198c9c2a5b618b
+          mvn sonar:sonar -Dsonar.projectKey="cinema" -Dsonar.projectName="cinema" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=sqp_7d7c316ed5f26b7a6da51ebca3fdab41f5cb9ec2
         # env:
         #   SONAR_TOKEN: sqb_0a1fc0450f85147fd59e2a74f8198c9c2a5b618b
 
