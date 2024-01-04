@@ -1,51 +1,82 @@
-# This is a basic workflow to help you get started with Actions
+name: send_any_push_to_sonarqube
 
-name: A1
-
-# Controls when the workflow will run
 on: push
-  # Triggers the workflow on push or pull request events but only for the "main" branch
-  # push:
-  #   branches: [ "main" ]
-  # pull_request:
-  #   branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  my_testing:
+  send_to_sonarqube:
     runs-on: ubuntu-latest
 
     steps:
 
-      - name: step Branch-name
-        run: echo running on branch ${GITHUB_REF##*/}
-
-      - name: step Checkout-code
+      - name: checkout_code
         uses: actions/checkout@v3
 
-      - name: step Set up Java
+      - name: set_up_java
         uses: actions/setup-java@v3
-
         with:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: analysis.author
-        run: echo ${{ github.actor }}
-
-      - name: BRANCH_NAME
-        run: echo BRANCH_NAME=${GITHUB_REF##*/}
-
-      - name: SONAR_PROJECT_KEY
-        run: echo SONAR_PROJECT_KEY=${GITHUB_REF##*/}
-
-      - name: Sonarqube
-
+      - name: send_to_sonarqube
         run: |
           mvn sonar:sonar -Dsonar.projectKey="cinema" -Dsonar.projectName="cinema" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=sqp_7d7c316ed5f26b7a6da51ebca3fdab41f5cb9ec2
+
+
+
+
+
+# This is a basic workflow to help you get started with Actions
+
+# name: A1
+
+# # Controls when the workflow will run
+# on: push
+#   # Triggers the workflow on push or pull request events but only for the "main" branch
+#   # push:
+#   #   branches: [ "main" ]
+#   # pull_request:
+#   #   branches: [ "main" ]
+
+#   # Allows you to run this workflow manually from the Actions tab
+#   # workflow_dispatch:
+
+# # A workflow run is made up of one or more jobs that can run sequentially or in parallel
+# jobs:
+#   my_testing:
+#     runs-on: ubuntu-latest
+
+#     steps:
+
+#       - name: step Branch-name
+#         run: echo running on branch ${GITHUB_REF##*/}
+
+#       - name: step Checkout-code
+#         uses: actions/checkout@v3
+
+#       - name: step Set up Java
+#         uses: actions/setup-java@v3
+
+#         with:
+#           distribution: 'adopt'
+#           java-version: '17'
+
+#       - name: analysis.author
+#         run: echo ${{ github.actor }}
+
+#       - name: BRANCH_NAME
+#         run: echo BRANCH_NAME=${GITHUB_REF##*/}
+
+#       - name: SONAR_PROJECT_KEY
+#         run: echo SONAR_PROJECT_KEY=${GITHUB_REF##*/}
+
+#       - name: Sonarqube
+
+#         run: |
+#           mvn sonar:sonar -Dsonar.projectKey="cinema" -Dsonar.projectName="cinema" -Dsonar.host.url=http://31.220.85.178:9001 -Dsonar.login=sqp_7d7c316ed5f26b7a6da51ebca3fdab41f5cb9ec2
+        
+        
+        
+        
         # env:
         #   SONAR_TOKEN: sqb_0a1fc0450f85147fd59e2a74f8198c9c2a5b618b
 
